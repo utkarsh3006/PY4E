@@ -1,0 +1,27 @@
+bro i think urlopen works with urllib.request so look into it 
+
+
+import urllib.request
+import json
+import ssl
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url=input("Enter location: ")
+print("Retrieving ",url)
+uh=urllib.request.urlopen(url)
+data=uh.read()
+print("Retrieved {} characters".format(len(data)))
+info=json.loads(data)
+print("Count :",len(info["comments"]))
+total=0;
+for item in info["comments"]:
+        total+=int(item["count"])
+print(total)
+
+
+
+
+
